@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = ConstantTable.CUSTOMER)
