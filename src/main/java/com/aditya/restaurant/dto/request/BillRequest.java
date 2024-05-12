@@ -10,5 +10,7 @@ import java.util.List;
 @Builder
 public class BillRequest {
     private String customerId;
+    private String tableId;
+    private String transTypeId;
     private List<BillDetailRequest> billDetails;
 }
