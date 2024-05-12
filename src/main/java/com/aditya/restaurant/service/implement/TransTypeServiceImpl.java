@@ -33,7 +33,7 @@ public class TransTypeServiceImpl implements TransTypeService {
     @Override
     public TransType update(TransType request) {
         TransType transType = findTransTypeOrThrowNotFound(request.getId());
-        return transTypeRepository.saveAndFlush(transType);
+        return transTypeRepository.saveAndFlush(request);
     }
 
     @Override

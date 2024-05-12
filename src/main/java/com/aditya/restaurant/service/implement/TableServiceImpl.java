@@ -33,7 +33,7 @@ public class TableServiceImpl implements TableService {
     @Override
     public Tables update(Tables request) {
         Tables table = findTableOrThrowNotFound(request.getId());
-        return tableRepository.saveAndFlush(table);
+        return tableRepository.saveAndFlush(request);
     }
 
     @Override
