@@ -1,15 +1,16 @@
 package com.aditya.restaurant.service.implement;
 
+import com.aditya.restaurant.entity.Customer;
 import com.aditya.restaurant.entity.Menu;
 import com.aditya.restaurant.repository.MenuRepository;
 import com.aditya.restaurant.service.MenuService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@AllArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class MenuServiceImpl implements MenuService {
 
     private final MenuRepository menuRepository;
@@ -31,7 +32,16 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu update(Menu request) {
-        findMenuOrElseThrowException(request.getId());
+        Menu menu = findMenuOrElseThrowException(request.getId());
+
+        if (request.getName() == null) {
+            request.setName(menu.getName());
+        }
+
+        if (request.getPrice() == null) {
+            request.setPrice(menu.getPrice());
+        }
+
         return menuRepository.saveAndFlush(request);
     }
 

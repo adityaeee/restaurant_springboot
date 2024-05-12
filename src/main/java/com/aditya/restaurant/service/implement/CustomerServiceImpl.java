@@ -3,12 +3,10 @@ package com.aditya.restaurant.service.implement;
 import com.aditya.restaurant.entity.Customer;
 import com.aditya.restaurant.repository.CustomerRepository;
 import com.aditya.restaurant.service.CustomerService;
-import com.aditya.restaurant.utils.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

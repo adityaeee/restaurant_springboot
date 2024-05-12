@@ -1,7 +1,6 @@
 package com.aditya.restaurant.service;
 
 import com.aditya.restaurant.entity.Menu;
-import com.aditya.restaurant.entity.Tables;
 
 import java.util.List;
 
