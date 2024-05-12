@@ -1,9 +1,7 @@
 package com.aditya.restaurant.entity;
 
 import com.aditya.restaurant.constant.ConstantTable;
-import com.aditya.restaurant.utils.Member;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.*;
 
 @Data
@@ -11,8 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = ConstantTable.CUSTOMER)
-public class Customer {
+@Table(name = ConstantTable.MENU)
+public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -20,9 +18,6 @@ public class Customer {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "mobile_phone")
-    private String phone;
-
-    @Enumerated(EnumType.STRING)
-    private Member member;
+    @Column(name = "price")
+    private Long price;
 }
