@@ -1,6 +1,7 @@
 package com.aditya.restaurant.entity;
 
 import com.aditya.restaurant.constant.ConstantTable;
+import com.aditya.restaurant.utils.TransTypeDes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +19,8 @@ public class TransType {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "description")
-    private String description;
+    @Enumerated(EnumType.STRING)
+    private TransTypeDes description;
 }
 
 

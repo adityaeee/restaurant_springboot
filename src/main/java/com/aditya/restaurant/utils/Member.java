@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 public enum Member {
     MEMBER("restaurant members"),
-    NOT_MEMBER("not a restaurant members");
+    NOT_MEMBER("not member");
 
     private final String value;
 }
