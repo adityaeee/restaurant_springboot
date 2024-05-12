@@ -30,6 +30,10 @@ public class Bill {
     @JoinColumn(name = "table_id", nullable = false)
     private Tables table;
 
+    @ManyToOne
+    @JoinColumn(name = "trans_type_id")
+    private TransType transType;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "trans_date", updatable = false)
     private Date transDate;

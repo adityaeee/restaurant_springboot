@@ -7,7 +7,8 @@ import lombok.Data;
 @Builder
 public class BillDetailResponse {
     private String id;
-    private String productId;
-    private Long productPrice;
+    private String menu;
+    private Long menuPrice;
     private Integer qty;
+    private Long totPrice;
 }

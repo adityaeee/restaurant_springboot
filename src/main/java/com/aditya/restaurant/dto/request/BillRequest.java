@@ -12,5 +12,6 @@ public class BillRequest {
     private String customerId;
     private String tableId;
     private String transTypeId;
+    private Long paymentAmount;
     private List<BillDetailRequest> billDetails;
 }

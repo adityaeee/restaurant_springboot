@@ -11,7 +11,12 @@ import java.util.List;
 @Builder
 public class BillResponse {
     private String id;
-    private String customerId;
+    private String customerName;
+    private String table;
+    private String transType;
+    private Long totPrice;
+    private Long paymentAmount;
+    private Long change;
     private Date transDate;
     private List<BillDetailResponse> billDetails;
 }
