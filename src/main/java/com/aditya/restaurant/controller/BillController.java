@@ -5,10 +5,7 @@ import com.aditya.restaurant.dto.request.BillRequest;
 import com.aditya.restaurant.dto.response.BillResponse;
 import com.aditya.restaurant.service.BillService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +20,9 @@ public class BillController {
     public BillResponse createBill(@RequestBody BillRequest request) {
         return billService.create(request);
     };
+
+    @GetMapping
+    public List<BillResponse> getAllBill() {
+        return billService.getAllBill();
+    }
 }

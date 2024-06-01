@@ -34,6 +34,9 @@ public class Bill {
     @JoinColumn(name = "trans_type_id")
     private TransType transType;
 
+    @Column(name ="payment_amount")
+    private Long paymentAmount;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "trans_date", updatable = false)
     private Date transDate;

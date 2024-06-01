@@ -8,7 +8,9 @@ import com.aditya.restaurant.repository.BillRepository;
 import com.aditya.restaurant.service.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Date;
 import java.util.List;
@@ -38,6 +40,7 @@ public class BillServiceImpl implements BillService {
                 .table(table)
                 .transType(transType)
                 .transDate(new Date())
+                .paymentAmount(request.getPaymentAmount())
                 .build();
         billRepository.saveAndFlush(bill);
 
@@ -56,11 +59,12 @@ public class BillServiceImpl implements BillService {
         billDetailService.createBulk(billDetails);
         bill.setBillDetails(billDetails);
 
+
 //        4. return datanya berdasarkan bill response
         List<BillDetailResponse> billDetailResponses = billDetails.stream()
                 .map(billDetail -> {
-
-                    Menu menu = menuSerive.getById(billDetail.getId());
+                    
+                    Menu menu = menuSerive.getById(billDetail.getMenu().getId());
 
                     return BillDetailResponse.builder()
                             .id(billDetail.getId())
@@ -75,6 +79,10 @@ public class BillServiceImpl implements BillService {
                 .mapToLong(BillDetailResponse::getTotPrice
                 ).sum();
 
+        if((request.getPaymentAmount() - totPriceBill) < 0) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"amount of payment isn't enough");
+        }
+
         return BillResponse.builder()
                 .id(bill.getId())
                 .customerName(customer.getName())
@@ -86,5 +94,41 @@ public class BillServiceImpl implements BillService {
                 .transDate(bill.getTransDate())
                 .billDetails(billDetailResponses)
                 .build();
+    }
+
+    @Override
+    public List<BillResponse> getAllBill() {
+        List<Bill> bills = billRepository.findAll();
+
+        return bills.stream()
+                .map(bill -> {
+                            List<BillDetailResponse> billDetailResponse= bill.getBillDetails().stream()
+                                    .map(billDetail -> {
+                                        return BillDetailResponse.builder()
+                                                .id(billDetail.getId())
+                                                .menu(billDetail.getMenu().getName())
+                                                .menuPrice(billDetail.getMenu().getPrice())
+                                                .qty(billDetail.getQuantity())
+                                                .totPrice(billDetail.getMenu().getPrice() * billDetail.getQuantity())
+                                                .build();
+                                            }).toList();
+
+                            Long totPriceBill = billDetailResponse.stream()
+                                .mapToLong(BillDetailResponse::getTotPrice
+                                ).sum();
+
+                            return BillResponse.builder()
+                                    .id(bill.getId())
+                                    .customerName(bill.getCustomer().getName())
+                                    .table(bill.getTable().getName())
+                                    .transType(bill.getTransType().getDescription().getValue())
+                                    .totPrice(totPriceBill)
+                                    .paymentAmount(bill.getPaymentAmount())
+                                    .change(bill.getPaymentAmount() - totPriceBill)
+                                    .transDate(bill.getTransDate())
+                                    .billDetails(billDetailResponse)
+                                    .build();
+                            }
+                ).toList();
     }
 }
