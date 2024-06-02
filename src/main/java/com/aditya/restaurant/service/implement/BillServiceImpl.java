@@ -24,7 +24,7 @@ public class BillServiceImpl implements BillService {
     private final CustomerService customerService;
     private final TransTypeService transTypeService;
     private final TableService tableService;
-    private final MenuService menuSerive;
+    private final MenuService menuService;
 
     @Transactional(rollbackOn = Exception.class)
     @Override
@@ -47,7 +47,7 @@ public class BillServiceImpl implements BillService {
 //        3. save ke bill detail
         List<BillDetail> billDetails = request.getBillDetails().stream()
                 .map(detailRequest -> {
-                    Menu menu = menuSerive.getById(detailRequest.getMenuId());
+                    Menu menu = menuService.getById(detailRequest.getMenuId());
 
                     return BillDetail.builder()
                             .bill(bill)
@@ -64,7 +64,7 @@ public class BillServiceImpl implements BillService {
         List<BillDetailResponse> billDetailResponses = billDetails.stream()
                 .map(billDetail -> {
                     
-                    Menu menu = menuSerive.getById(billDetail.getMenu().getId());
+                    Menu menu = menuService.getById(billDetail.getMenu().getId());
 
                     return BillDetailResponse.builder()
                             .id(billDetail.getId())
