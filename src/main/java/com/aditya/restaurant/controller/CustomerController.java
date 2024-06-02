@@ -5,6 +5,7 @@ import com.aditya.restaurant.entity.Customer;
 import com.aditya.restaurant.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 

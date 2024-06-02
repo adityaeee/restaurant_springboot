@@ -4,9 +4,12 @@ import com.aditya.restaurant.entity.Customer;
 import com.aditya.restaurant.repository.CustomerRepository;
 import com.aditya.restaurant.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getById(String id) {
+//        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"gak ada bos");
         return findCustomerOrThrowNotFound(id);
     }
 

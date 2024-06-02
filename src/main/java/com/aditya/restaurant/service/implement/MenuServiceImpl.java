@@ -1,10 +1,18 @@
 package com.aditya.restaurant.service.implement;
 
+import com.aditya.restaurant.dto.request.SearchMenuRequest;
+import com.aditya.restaurant.dto.response.MenuResponse;
 import com.aditya.restaurant.entity.Customer;
 import com.aditya.restaurant.entity.Menu;
 import com.aditya.restaurant.repository.MenuRepository;
 import com.aditya.restaurant.service.MenuService;
+import com.aditya.restaurant.specification.MenuSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +34,34 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> getAll() {
-        return menuRepository.findAll();
+    public Page<MenuResponse> getAll(SearchMenuRequest request) {
+
+        if(request.getPage() <= 0) {
+            request.setPage(1);
+        }
+
+        String validSortBy;
+        if("name".equalsIgnoreCase(request.getSortBy()) || "price".equalsIgnoreCase(request.getSortBy())) {
+            validSortBy = request.getSortBy();
+        } else {
+            validSortBy = "name";
+        }
+
+        Sort sort = Sort.by(Sort.Direction.fromString(request.getDirection()), validSortBy);
+
+        Pageable pageable = PageRequest.of((request.getPage()-1), request.getSize(),sort);
+
+        Specification<Menu> menuSpecification = MenuSpecification.getSpecification(request);
+
+        Page<Menu> menuPage = menuRepository.findAll(menuSpecification, pageable);
+
+        return menuPage.map(menu -> {
+            return MenuResponse.builder()
+                    .id(menu.getId())
+                    .name(menu.getName())
+                    .price(menu.getPrice())
+                    .build();
+        });
     }
 
     @Override
