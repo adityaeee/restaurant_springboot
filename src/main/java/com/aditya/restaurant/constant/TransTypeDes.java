@@ -1,4 +1,4 @@
-package com.aditya.restaurant.utils;
+package com.aditya.restaurant.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

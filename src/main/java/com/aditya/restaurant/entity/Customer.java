@@ -1,7 +1,7 @@
 package com.aditya.restaurant.entity;
 
 import com.aditya.restaurant.constant.ConstantTable;
-import com.aditya.restaurant.utils.Member;
+import com.aditya.restaurant.constant.Member;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.*;

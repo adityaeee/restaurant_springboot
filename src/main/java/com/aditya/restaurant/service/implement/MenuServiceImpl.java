@@ -1,12 +1,14 @@
 package com.aditya.restaurant.service.implement;
 
 import com.aditya.restaurant.dto.request.SearchMenuRequest;
+import com.aditya.restaurant.dto.request.ValidationMenuRequest;
 import com.aditya.restaurant.dto.response.MenuResponse;
 import com.aditya.restaurant.entity.Customer;
 import com.aditya.restaurant.entity.Menu;
 import com.aditya.restaurant.repository.MenuRepository;
 import com.aditya.restaurant.service.MenuService;
 import com.aditya.restaurant.specification.MenuSpecification;
+import com.aditya.restaurant.utils.ValidationUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,10 +24,18 @@ import java.util.List;
 public class MenuServiceImpl implements MenuService {
 
     private final MenuRepository menuRepository;
+    private final ValidationUtil validationUtil;
 
     @Override
-    public Menu create(Menu request) {
-        return menuRepository.saveAndFlush(request);
+    public Menu create(ValidationMenuRequest request) {
+        validationUtil.validate(request);
+
+        Menu newMenu = Menu.builder()
+                .name(request.getName())
+                .price(request.getPrice())
+                .build();
+
+        return menuRepository.saveAndFlush(newMenu);
     }
 
     @Override

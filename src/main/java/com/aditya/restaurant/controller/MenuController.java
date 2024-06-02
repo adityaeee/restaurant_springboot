@@ -3,6 +3,7 @@ package com.aditya.restaurant.controller;
 import com.aditya.restaurant.constant.APIUrl;
 import com.aditya.restaurant.constant.ResponseMessage;
 import com.aditya.restaurant.dto.request.SearchMenuRequest;
+import com.aditya.restaurant.dto.request.ValidationMenuRequest;
 import com.aditya.restaurant.dto.response.CommonResponse;
 import com.aditya.restaurant.dto.response.MenuResponse;
 import com.aditya.restaurant.dto.response.PagingResponse;
@@ -24,8 +25,14 @@ public class MenuController {
     private final MenuService menuService;
 
     @PostMapping
-    public Menu createMenu(@RequestBody Menu request){
-        return menuService.create(request);
+    public ResponseEntity<CommonResponse<Menu>> createMenu(@RequestBody ValidationMenuRequest request){
+        Menu newMenu = menuService.create(request);
+        CommonResponse<Menu>response =CommonResponse.<Menu>builder()
+                .statusCode(HttpStatus.CREATED.value())
+                .message(ResponseMessage.SUCCESS_SAVE_DATA)
+                .data(newMenu)
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
