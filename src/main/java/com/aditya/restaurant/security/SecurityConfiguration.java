@@ -28,6 +28,7 @@ public class SecurityConfiguration {
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers("api/v1/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"api/v1/menus/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"api/v1/bills/**").permitAll()
                         .anyRequest().authenticated()
                 )
 //                .addFilterBefore(
