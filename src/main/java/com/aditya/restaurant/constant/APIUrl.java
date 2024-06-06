@@ -8,4 +8,5 @@ public class APIUrl {
     public static final String TRANS_TYPE = "/api/v1/transtypes";
     public static final String BILL = "/api/v1/bills";
     public static final String BILL_DETAIL = "/api/v1/bill-details";
+    public static final String AUTH = "/api/v1/auth";
 }

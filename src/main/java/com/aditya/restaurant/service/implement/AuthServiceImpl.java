@@ -1,17 +1,22 @@
 package com.aditya.restaurant.service.implement;
 
+import com.aditya.restaurant.constant.Member;
 import com.aditya.restaurant.constant.UserRole;
 import com.aditya.restaurant.dto.request.AuthRequest;
 import com.aditya.restaurant.dto.response.LoginResponse;
 import com.aditya.restaurant.dto.response.RegisterResponse;
+import com.aditya.restaurant.entity.Customer;
 import com.aditya.restaurant.entity.Role;
 import com.aditya.restaurant.entity.UserAccount;
 import com.aditya.restaurant.repository.UserAccountRepository;
 import com.aditya.restaurant.service.AuthService;
+import com.aditya.restaurant.service.CustomerService;
 import com.aditya.restaurant.service.RoleService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +29,9 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserAccountRepository userAccountRepository;
     private final RoleService roleService;
+
+    private final PasswordEncoder passwordEncoder;
+    private final CustomerService customerService;
 
     @Value("${restaurant.superadmin.username}")
     private String superAdminUsername;
@@ -52,11 +60,31 @@ public class AuthServiceImpl implements AuthService {
         userAccountRepository.saveAndFlush(account);
     }
 
-
-
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public RegisterResponse register(AuthRequest request) {
-        return null;
+        Role roleCustomer = roleService.getOrSave(UserRole.ROLE_CUSTOMER);
+
+        String hasPassword = passwordEncoder.encode(request.getPassword());
+
+        UserAccount userAccount = UserAccount.builder()
+                .username(request.getUsername())
+                .password(hasPassword)
+                .isEnable(true)
+                .role(List.of(roleCustomer))
+                .build();
+        userAccountRepository.saveAndFlush(userAccount);
+
+        Customer customer = Customer.builder()
+                .member(Member.MEMBER)
+                .userAccount(userAccount)
+                .build();
+        customerService.create(customer);
+
+        return RegisterResponse.builder()
+                .username(userAccount.getUsername())
+                .roles(userAccount.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
+                .build();
     }
 
     @Override
