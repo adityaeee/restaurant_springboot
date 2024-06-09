@@ -41,4 +41,7 @@ public class Customer {
     @OneToOne
     @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
 }

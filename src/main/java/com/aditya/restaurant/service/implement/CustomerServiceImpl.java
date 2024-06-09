@@ -1,5 +1,6 @@
 package com.aditya.restaurant.service.implement;
 
+import com.aditya.restaurant.constant.Member;
 import com.aditya.restaurant.entity.Customer;
 import com.aditya.restaurant.repository.CustomerRepository;
 import com.aditya.restaurant.service.CustomerService;
@@ -19,6 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer create(Customer customer) {
+        customer.setMember(Member.MEMBER);
         return customerRepository.saveAndFlush(customer);
     }
 
@@ -30,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getAll() {
-        return customerRepository.findAll();
+        return customerRepository.findByIsDeletedFalse();
     }
 
     @Override
@@ -52,10 +54,17 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(String id) {
         Customer customer = findCustomerOrThrowNotFound(id);
-        customerRepository.delete(customer);
+//        customerRepository.delete(customer);
+        customer.setDeleted(true);
+        customerRepository.saveAndFlush(customer);
     }
 
     public Customer findCustomerOrThrowNotFound (String id) {
-        return customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Customer not found"));
+
+        if (customer.isDeleted()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Customer not found");
+        }
+        return customer;
     }
 }
