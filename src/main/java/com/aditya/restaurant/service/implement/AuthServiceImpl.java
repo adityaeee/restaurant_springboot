@@ -11,10 +11,14 @@ import com.aditya.restaurant.entity.UserAccount;
 import com.aditya.restaurant.repository.UserAccountRepository;
 import com.aditya.restaurant.service.AuthService;
 import com.aditya.restaurant.service.CustomerService;
+import com.aditya.restaurant.service.JwtService;
 import com.aditya.restaurant.service.RoleService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,6 +36,11 @@ public class AuthServiceImpl implements AuthService {
 
     private final PasswordEncoder passwordEncoder;
     private final CustomerService customerService;
+
+//    create bean
+    private final AuthenticationManager authenticationManager;
+
+    private final JwtService jwtService;
 
     @Value("${restaurant.superadmin.username}")
     private String superAdminUsername;
@@ -87,8 +96,24 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public LoginResponse login(AuthRequest request) {
-        return null;
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                request.getUsername(),
+                request.getPassword()
+        );
+
+        Authentication autenticated = authenticationManager.authenticate(authentication);
+
+        UserAccount userAccount = (UserAccount) autenticated.getPrincipal();
+
+        String token = jwtService.generateToken(userAccount);
+
+        return LoginResponse.builder()
+                .username(userAccount.getUsername())
+                .token(token)
+                .roles(userAccount.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
+                .build();
     }
 }

@@ -4,6 +4,7 @@ import com.aditya.restaurant.constant.APIUrl;
 import com.aditya.restaurant.constant.ResponseMessage;
 import com.aditya.restaurant.dto.request.AuthRequest;
 import com.aditya.restaurant.dto.response.CommonResponse;
+import com.aditya.restaurant.dto.response.LoginResponse;
 import com.aditya.restaurant.dto.response.RegisterResponse;
 import com.aditya.restaurant.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,19 @@ public class AuthController {
                 .statusCode(HttpStatus.CREATED.value())
                 .message(ResponseMessage.SUCCESS_SAVE_DATA)
                 .data(register)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<CommonResponse<?>> login(@RequestBody AuthRequest request) {
+        LoginResponse loginResponse = authService.login(request);
+
+        CommonResponse<LoginResponse> response = CommonResponse.<LoginResponse>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message("Login Successfully")
+                .data(loginResponse)
                 .build();
 
         return ResponseEntity.ok(response);

@@ -9,13 +9,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfiguration {
-//    private final AuthenticationFilter authenticationFilter;
+    private final AuthenticationFilter authenticationFilter;
 
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
@@ -28,13 +27,12 @@ public class SecurityConfiguration {
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers("api/v1/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"api/v1/menus/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"api/v1/bills/**").permitAll()
                         .anyRequest().authenticated()
                 )
-//                .addFilterBefore(
-//                        authenticationFilter,
-//                        UsernamePasswordAuthenticationFilter.class
-//                )
+                .addFilterBefore(
+                        authenticationFilter,
+                        UsernamePasswordAuthenticationFilter.class
+                )
                 .build();
     }
 }
