@@ -1,0 +1,899 @@
+{
+	"info": {
+		"_postman_id": "95a68e18-5ea7-4234-8dcd-81c7bc9b0fcd",
+		"name": "Restaurant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20141020"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Get All Customers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "4d141c9c-8b70-450c-a596-c038dce9a6b3",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Safaraz\",\n  \"phone\": \"0812345678\",\n  \"address\": \"Jl. Melati\",\n  \"birthDate\": \"2024-06-09\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers/05ea79b6-291c-4f73-ba9f-8991071c7dc1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"05ea79b6-291c-4f73-ba9f-8991071c7dc1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers/ada177dd-9f68-45aa-a4e8-685ed090d828",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"ada177dd-9f68-45aa-a4e8-685ed090d828"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"ada177dd-9f68-45aa-a4e8-685ed090d828\",\n  \"name\": \"Savaraz akma fayyad\",\n  \"phone\": \"0812345678\",\n  \"address\": \"Jl. B. Aceh-Medan\",\n  \"birthDate\": \"2024-05-10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Menu",
+			"item": [
+				{
+					"name": "Create New Menu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//   \"name\": \"Noodle Soup\",\n//   \"price\": 15000\n// }\n\n// {\n//   \"name\": \"Cola\",\n//   \"price\": 5000\n// }\n\n// {\n//   \"name\": \"Mie Goreng\",\n//   \"price\": 16000\n// }\n\n// {\n//   \"name\": \"Nasi Goreng\",\n//   \"price\": 22000\n// }\n\n// {\n//   \"name\": \"Dimsum\",\n//   \"price\": 20000\n// }\n\n// {\n//   \"name\": \"Tahu Walek\",\n//   \"price\": 20000\n// }\n\n// {\n//   \"name\": \"Kentang Goreng\",\n//   \"price\": 10000\n// }\n\n// {\n//   \"name\": \"Pizza\",\n//   \"price\": 70000\n// }\n\n// {\n//   \"name\": \"Mango Jelly\",\n//   \"price\": 13000\n// }\n\n// {\n//   \"name\": \"Indomie Kuah Telur\",\n//   \"price\": 13000\n// }\n\n// {\n//   \"name\": \"Indomie kuang Seafood\",\n//   \"price\": 24000\n// }\n\n{\n  \"name\": \"Sop Ayam\",\n  \"price\": 21000\n}\n\n// {\n//   \"name\": \"Kari Kambing\",\n//   \"price\": 41000\n// }\n// {\n//   \"name\": \"Kari Sapi\",\n//   \"price\": 47000\n// }\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/menus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"menus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Menu",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/menus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"menus"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "5",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "sortBy",
+									"value": "price",
+									"disabled": true
+								},
+								{
+									"key": "direction",
+									"value": "DESC",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Indomie",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "20000",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Menu By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/menus/a1039e1a-ced4-4136-99d1-01b2208f5e03",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"menus",
+								"a1039e1a-ced4-4136-99d1-01b2208f5e03"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Menu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"a1039e1a-ced4-4136-99d1-01b2208f5e03\",\n    \"name\" : \"kari ayam pedas\",\n  \"price\": 17000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/menus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"menus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Menu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/menus/a1039e1a-ced4-4136-99d1-01b2208f5e03",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"menus",
+								"a1039e1a-ced4-4136-99d1-01b2208f5e03"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Table",
+			"item": [
+				{
+					"name": "Get All Tables",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/tables",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Table",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//   \"name\": \"melati 01\"\r\n// }\r\n\r\n{\r\n  \"name\": \"melati 02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/tables",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Table By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/tables/7bea6e28-8b74-4e34-ac45-64c5478174de",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tables",
+								"7bea6e28-8b74-4e34-ac45-64c5478174de"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update table",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": \"71a2a030-6735-4b5e-876d-d089b722b862\",\r\n    \"name\": \"mawar 3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/tables",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Table",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/tables/7bea6e28-8b74-4e34-ac45-64c5478174de",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tables",
+								"7bea6e28-8b74-4e34-ac45-64c5478174de"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bill",
+			"item": [
+				{
+					"name": "Create Bill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": \"b5e5f109-3b5b-4112-8e21-b0c6b3140aef\",\r\n  \"tableId\": \"71a2a030-6735-4b5e-876d-d089b722b862\",\r\n  \"transTypeId\": \"51807d0a-7d1e-47f4-8174-bd837a0a847e\",\r\n  \"paymentAmount\" : 200000,\r\n  \"billDetails\": [\r\n    {\r\n      \"menuId\": \"f77ef850-c14b-4176-9a17-100af6d674bd\",\r\n      \"qty\": 2\r\n    },\r\n    {\r\n      \"menuId\": \"b8814ac1-98c6-4b66-813f-0a164d2fa2f9\",\r\n      \"qty\": 2\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/bills",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"bills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Bill",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/bills",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"bills"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trans Type",
+			"item": [
+				{
+					"name": "Create New TransType",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"description\": \"NON_CASH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/transtypes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transtypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All TransType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/transtypes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transtypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get TransType By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/transtypes/51807d0a-7d1e-47f4-8174-bd837a0a847e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transtypes",
+								"51807d0a-7d1e-47f4-8174-bd837a0a847e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update TransType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"51807d0a-7d1e-47f4-8174-bd837a0a847e\",\r\n  \"description\": \"CASH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/transtypes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transtypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete TransType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTc5MTU4MjAsImV4cCI6MTc0NjcxNTgyMCwiaXNzIjoiQWRpdHlhIiwic3ViIjoiNjU4NTIxZDItYjgzNC00ZDkzLWE0NTAtMTUzM2Q4OGUzNGM5Iiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdfQ.4w8CDvoXD0gwuKehKHiRU54EeeJkRemUkzH3LVYGxxpR92sHLa3jPs6gQPqytb0XPc-dUXxncmTpwXao0IQa8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/transtypes/51807d0a-7d1e-47f4-8174-bd837a0a847e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transtypes",
+								"51807d0a-7d1e-47f4-8174-bd837a0a847e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"muhammad\",\r\n  \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"superadmin\",\r\n  \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
