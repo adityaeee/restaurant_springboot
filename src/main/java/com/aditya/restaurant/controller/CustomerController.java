@@ -9,6 +9,7 @@ import com.aditya.restaurant.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,6 +22,7 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @PostMapping
     public ResponseEntity<CommonResponse<CustomerResponse>> createCustomer (@RequestBody Customer request){
         Customer customer = customerService.create(request);
@@ -41,6 +43,7 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     };
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN', 'CUSTOMER')")
     @GetMapping(path = APIUrl.PATH_ID)
     public ResponseEntity<CommonResponse<CustomerResponse>> getCustomerById (@PathVariable String id) {
         Customer customer = customerService.getById(id);
@@ -63,6 +66,7 @@ public class CustomerController {
 
     };
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @GetMapping
     public ResponseEntity<CommonResponse<List<CustomerResponse>>> getAllCustomer () {
         List<Customer> customers = customerService.getAll();
@@ -87,7 +91,7 @@ public class CustomerController {
         return ResponseEntity.ok(response);
     }
 
-
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN', 'CUSTOMER')")
     @PutMapping
     public ResponseEntity<CommonResponse<CustomerResponse>> updateCustomer (
             @RequestBody Customer request
@@ -112,6 +116,7 @@ public class CustomerController {
 
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN', 'CUSTOMER')")
     @DeleteMapping(path = APIUrl.PATH_ID)
     public ResponseEntity<CommonResponse<String>> deleteCustomer (@PathVariable String id) {
         customerService.delete(id);

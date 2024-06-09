@@ -14,6 +14,7 @@ import org.springframework.boot.web.client.RootUriBuilderFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.List;
 public class MenuController {
     private final MenuService menuService;
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @PostMapping
     public ResponseEntity<CommonResponse<MenuResponse>> createMenu(@RequestBody ValidationMenuRequest request){
         Menu newMenu = menuService.create(request);
@@ -41,6 +43,7 @@ public class MenuController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN', 'CUSTOMER')")
     @GetMapping
     public ResponseEntity<CommonResponse<List<MenuResponse>>> getAllMenu(
         @RequestParam(name = "name", required = false) String name,
@@ -80,6 +83,7 @@ public class MenuController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @GetMapping(path = APIUrl.PATH_ID)
     public ResponseEntity<CommonResponse<MenuResponse>> getById(@PathVariable String id) {
         Menu menu = menuService.getById(id);
@@ -97,6 +101,7 @@ public class MenuController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @PutMapping
     public ResponseEntity<CommonResponse<MenuResponse>> updateMenu(@RequestBody Menu request) {
         Menu menu = menuService.update(request);
@@ -115,7 +120,7 @@ public class MenuController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
 
     }
-
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @DeleteMapping(path = APIUrl.PATH_ID)
     public ResponseEntity<CommonResponse<String>> deleteMenu(@PathVariable String id) {
         menuService.delete(id);

@@ -10,6 +10,7 @@ import com.aditya.restaurant.service.TransTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class TransTypeController {
 
     private final TransTypeService transTypeService;
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @PostMapping
     public ResponseEntity<CommonResponse<TransType>> createTransType(@RequestBody TransType request){
         TransType transType = transTypeService.create(request);
@@ -33,6 +35,7 @@ public class TransTypeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @GetMapping
     public ResponseEntity<CommonResponse<List<TransType>>> getAllTransType() {
         List<TransType> transTypes = transTypeService.getAll();
@@ -46,6 +49,7 @@ public class TransTypeController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @GetMapping(path = APIUrl.PATH_ID)
     public ResponseEntity<CommonResponse<TransType>> getByIdTransType (@PathVariable String id) {
         TransType transType = transTypeService.getById(id);
@@ -59,6 +63,7 @@ public class TransTypeController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @PutMapping
     public ResponseEntity<CommonResponse<TransType>> updateTransType (@RequestBody TransType request) {
         TransType transType = transTypeService.update(request);
@@ -72,6 +77,7 @@ public class TransTypeController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @DeleteMapping(APIUrl.PATH_ID)
     public ResponseEntity<CommonResponse<String>> deleteTransType(@PathVariable String id) {
         transTypeService.delete(id);

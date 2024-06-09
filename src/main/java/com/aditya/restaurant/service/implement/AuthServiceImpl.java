@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
 
         UserAccount account = UserAccount.builder()
                 .username(superAdminUsername)
-                .password(superAdminPassword)
+                .password(passwordEncoder.encode(superAdminPassword))
                 .role(List.of(superAdmin, admin, customer))
                 .isEnable(true)
                 .build();

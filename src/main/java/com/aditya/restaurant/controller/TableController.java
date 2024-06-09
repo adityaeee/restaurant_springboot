@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 public class TableController {
     private TableService tableService;
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @PostMapping
     public ResponseEntity<CommonResponse<Tables>> createNewTable(@RequestBody Tables request) {
         Tables table = tableService.create(request);
@@ -31,6 +33,7 @@ public class TableController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     };
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN', 'CUSTOMER')")
     @GetMapping
     public ResponseEntity<CommonResponse<List<Tables>>> getAllTable () {
         List<Tables> tables = tableService.getAll();
@@ -43,6 +46,7 @@ public class TableController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @GetMapping(path = APIUrl.PATH_ID)
     public ResponseEntity<CommonResponse<Tables>> getById (@PathVariable String id) {
         Tables table = tableService.getById(id);
@@ -56,6 +60,7 @@ public class TableController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @PutMapping
     public ResponseEntity<CommonResponse<Tables>> updateTabel (@RequestBody Tables request) {
         Tables table = tableService.update(request);
@@ -69,6 +74,7 @@ public class TableController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     @DeleteMapping(APIUrl.PATH_ID)
     public ResponseEntity<CommonResponse<String>> deleteTable(@PathVariable String id) {
         tableService.delete(id);
