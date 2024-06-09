@@ -25,12 +25,18 @@ public class MenuController {
     private final MenuService menuService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse<Menu>> createMenu(@RequestBody ValidationMenuRequest request){
+    public ResponseEntity<CommonResponse<MenuResponse>> createMenu(@RequestBody ValidationMenuRequest request){
         Menu newMenu = menuService.create(request);
-        CommonResponse<Menu>response =CommonResponse.<Menu>builder()
+
+        MenuResponse menuResponse = MenuResponse.builder()
+                .name(newMenu.getName())
+                .price(newMenu.getPrice())
+                .build();
+
+        CommonResponse<MenuResponse>response =CommonResponse.<MenuResponse>builder()
                 .statusCode(HttpStatus.CREATED.value())
                 .message(ResponseMessage.SUCCESS_SAVE_DATA)
-                .data(newMenu)
+                .data(menuResponse)
                 .build();
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -75,19 +81,53 @@ public class MenuController {
     }
 
     @GetMapping(path = APIUrl.PATH_ID)
-    public Menu getById(@PathVariable String id) {
-        return menuService.getById(id);
+    public ResponseEntity<CommonResponse<MenuResponse>> getById(@PathVariable String id) {
+        Menu menu = menuService.getById(id);
+        MenuResponse menuResponse = MenuResponse.builder()
+                .name(menu.getName())
+                .price(menu.getPrice())
+                .build();
+
+        CommonResponse<MenuResponse> response = CommonResponse.<MenuResponse>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message(ResponseMessage.SUCCESS_GET_DATA)
+                .data(menuResponse)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping
-    public Menu updateMenu(@RequestBody Menu request) {
-        return menuService.update(request);
+    public ResponseEntity<CommonResponse<MenuResponse>> updateMenu(@RequestBody Menu request) {
+        Menu menu = menuService.update(request);
+
+        MenuResponse menuResponse = MenuResponse.builder()
+                .name(menu.getName())
+                .price(menu.getPrice())
+                .build();
+
+        CommonResponse<MenuResponse> response = CommonResponse.<MenuResponse>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message(ResponseMessage.SUCCESS_UPDATE_DATA)
+                .data(menuResponse)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
     }
 
     @DeleteMapping(path = APIUrl.PATH_ID)
-    public String deleteMenu(@PathVariable String id) {
+    public ResponseEntity<CommonResponse<String>> deleteMenu(@PathVariable String id) {
         menuService.delete(id);
-        return "The menu has been successfully deleted";
+        String res =  "The menu has been successfully deleted";
+
+        CommonResponse<String> response = CommonResponse.<String>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message(ResponseMessage.SUCCESS_DELETE_DATA)
+                .data(res)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 

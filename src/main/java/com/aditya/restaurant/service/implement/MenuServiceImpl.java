@@ -15,7 +15,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -67,7 +70,6 @@ public class MenuServiceImpl implements MenuService {
 
         return menuPage.map(menu -> {
             return MenuResponse.builder()
-                    .id(menu.getId())
                     .name(menu.getName())
                     .price(menu.getPrice())
                     .build();
@@ -92,10 +94,15 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void delete(String id) {
         Menu menu = findMenuOrElseThrowException(id);
-        menuRepository.delete(menu);
+        menu.setDeleted(true);
+        menuRepository.saveAndFlush(menu);
     }
 
     private Menu findMenuOrElseThrowException(String id) {
-        return menuRepository.findById(id).orElseThrow(()-> new RuntimeException("Menu not found!"));
+        Menu menu = menuRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Menu not found!"));
+        if (menu.isDeleted()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Menu not found!");
+        }
+        return menu;
     }
 }

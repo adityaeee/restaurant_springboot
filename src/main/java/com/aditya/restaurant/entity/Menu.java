@@ -4,7 +4,8 @@ import com.aditya.restaurant.constant.ConstantTable;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,4 +21,7 @@ public class Menu {
 
     @Column(name = "price")
     private Long price;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
 }

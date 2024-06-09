@@ -46,7 +46,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-        System.out.println("ddddddddddddddddd");
+        System.out.println("Authentication filter running");
     }
 }
 

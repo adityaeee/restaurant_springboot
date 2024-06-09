@@ -13,6 +13,8 @@ public class MenuSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
+            predicates.add(criteriaBuilder.isFalse(root.get("isDeleted")));
+
             if (request.getName() != null) {
                 predicates.add(
                         criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%"+request.getName().toLowerCase()+"%")
